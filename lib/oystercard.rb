@@ -1,8 +1,4 @@
 class Oystercard
-  attr_reader :balance
-  attr_reader :journey_history
-  attr_reader :current_journey
-
   MAX_BALANCE = 90
   MIN_BALANCE = 1
 
@@ -12,9 +8,17 @@ class Oystercard
     @current_journey = {entry: nil, exit: nil}
   end
 
-  def add_money(money)
+  def show_balance
+    @balance
+  end
+
+  def show_journey_history
+    @journey_history
+  end
+
+  def top_up(money)
     fail "funds cannot be added: maximum balance £#{MAX_BALANCE}" if max_balance_exceeded
-    @balance += money
+    increase_money(money)
   end
 
   def touch_in(station)
@@ -30,12 +34,10 @@ class Oystercard
   end
 
   def on_journey?
-    current_journey[:entry] == nil ? false : true
+    @current_journey[:entry] == nil ? false : true
   end
 
   private
-  #single responsibility principle honoured by making max_balance_exceeded method instead of
-  #including @balance >= MAX_BALANCE in the fail method above
   def max_balance_exceeded
     @balance >= MAX_BALANCE
   end
@@ -44,5 +46,8 @@ class Oystercard
     @balance -= money
   end
 
+  def increase_money(money)
+    @balance += money
+  end
 end
  

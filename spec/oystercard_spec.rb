@@ -11,53 +11,41 @@ describe Oystercard do
   end
 
   it "tells user if they are on a journey" do
-    oystercard.add_money(Oystercard::MIN_BALANCE)
+    oystercard.top_up(Oystercard::MIN_BALANCE)
     oystercard.touch_in(station)
     expect(oystercard.on_journey?).to eq true
   end
 
-  it 'remembers entry station' do
-    oystercard.add_money(1)
-    oystercard.touch_in(station)
-    expect(oystercard.current_journey[:entry]).not_to eq nil
-  end
-
   describe '# journey_history' do
     it 'records and returns journey history' do
-      oystercard.add_money(Oystercard::MAX_BALANCE)
+      oystercard.top_up(Oystercard::MAX_BALANCE)
       3.times { oystercard.touch_in(station); oystercard.touch_out(station) }
-      expect(oystercard.journey_history).not_to be_empty
+      expect(oystercard.show_journey_history).not_to be_empty
     end
   end
 
   describe '# current_journey' do
     it 'records entry and exit station' do
-      oystercard.add_money(Oystercard::MAX_BALANCE)
+      oystercard.top_up(Oystercard::MAX_BALANCE)
       oystercard.touch_in(station)
       oystercard.touch_out(station)
-      expect(oystercard.current_journey).to eq({:entry=>station, :exit=>station})
+      expect(oystercard.show_journey_history[0]).to eq({:entry=>station, :exit=>station})
     end
   end
 
   describe '# add money' do
-    it 'responds to add_money with 1 argument' do
-      expect(oystercard).to respond_to(:add_money).with(1).argument
+    it 'responds to top_up with 1 argument' do
+      expect(oystercard).to respond_to(:top_up).with(1).argument
     end
 
     it 'does not allow user to add more than maximum funds' do
-      oystercard.add_money(90)
-      expect { oystercard.add_money(1) }.to raise_error 'funds cannot be added: maximum balance £90'
+      oystercard.top_up(Oystercard::MAX_BALANCE)
+      expect { oystercard.top_up(1) }.to raise_error 'funds cannot be added: maximum balance £90'
     end
-  end
 
-  describe '# balance' do
-    it 'responds to balance' do
-      oystercard.balance
-      expect(oystercard).to respond_to :balance
-    end
 
     it 'returns balance' do
-      expect(oystercard.balance).to eq(0)
+      expect(oystercard.show_balance).to eq(0)
     end
   end
  
@@ -67,9 +55,9 @@ describe Oystercard do
     end
 
     it "removes fare from balance" do
-      oystercard.add_money(Oystercard::MIN_BALANCE)
+      oystercard.top_up(Oystercard::MIN_BALANCE)
       oystercard.touch_in(station)
-      expect{ oystercard.touch_out(station) }.to change {oystercard.balance}.by(-Oystercard::MIN_BALANCE)
+      expect{ oystercard.touch_out(station) }.to change {oystercard.show_balance}.by(-Oystercard::MIN_BALANCE)
     end
   end
 
