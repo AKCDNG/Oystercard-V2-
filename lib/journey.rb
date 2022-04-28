@@ -14,4 +14,9 @@ class Journey
     @current_journey[:entry] = station_instance
   end
 
+  def end_journey(station_instance)
+    @current_journey[:exit] = station_instance
+  end
+  
+
 end
