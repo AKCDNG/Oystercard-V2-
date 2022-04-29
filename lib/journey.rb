@@ -1,7 +1,3 @@
-# start_station(station)
-# exit_station(station)
-# calc fare
-
 class Journey
 
   FARE = 1
@@ -21,16 +17,24 @@ class Journey
     @current_journey[:exit] = station_instance
   end
 
-  def on_journey?
-    @current_journey[:entry] != nil ? true : false
-  end
+  # def on_journey?
+  #   @current_journey[:entry] != nil ? true : false
+  # end
 
-  def reset_journey
+  def reset
     @current_journey = {entry: nil, exit: nil}
   end
 
+  def incomplete_on_touch_in?
+    @current_journey[:entry] != nil && @current_journey[:exit] == nil
+  end
+
+  def incomplete_on_touch_out?
+    @current_journey[:entry] == nil
+  end
+
   def fare
-    @current_journey[:entry] != nil ? FARE : PENALTY_FARE
+    incomplete_on_touch_in? || incomplete_on_touch_out? ? PENALTY_FARE : FARE
   end
 
 end
