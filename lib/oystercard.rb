@@ -22,7 +22,7 @@ class Oystercard
   def touch_in(station) # station needs to be instance of Station class
     fail "Insufficient funds" if @balance < MIN_BALANCE
     # penalty path
-    if @journey.incomplete_on_touch_in? 
+    if @journey.on_journey?
       deduct_money
       @journey_history << @journey.current_journey
     end
@@ -33,7 +33,7 @@ class Oystercard
 
   def touch_out(station) # station needs to be instance of Station class
     @journey.end_journey(station)
-    deduct_money
+    deduct_money # here penalty path is implemented at payment only
     @journey_history << @journey.current_journey
     @journey.reset
   end
