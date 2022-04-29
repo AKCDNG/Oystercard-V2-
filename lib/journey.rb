@@ -22,4 +22,8 @@ class Journey
     @current_journey[:entry] == nil ? false : true
   end
 
+  def reset_journey
+    @current_journey = {entry: nil, exit: nil}
+  end
+
 end

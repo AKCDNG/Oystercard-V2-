@@ -59,6 +59,12 @@ describe Oystercard do
     it "refuses entry unless minimum balance is #{Oystercard::MIN_BALANCE}" do
       expect { oystercard.touch_in(station) }.to raise_error "Insufficient funds"
     end
+
+    it "raises an error to touch_in twice" do
+      oystercard.top_up(Oystercard::MAX_BALANCE)
+      oystercard.touch_in(station)
+      expect{ oystercard.touch_in(station)}.to raise_error "Already touched in"
+    end
   end
 
 end
