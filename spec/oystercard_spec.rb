@@ -10,12 +10,6 @@ describe Oystercard do
     expect(oystercard).to be_instance_of(Oystercard)
   end
 
-  it "tells user if they are on a journey" do
-    oystercard.top_up(Oystercard::MIN_BALANCE)
-    oystercard.touch_in(station)
-    expect(oystercard.on_journey?).to eq true
-  end
-
   describe '# journey_history' do
     it 'records and returns journey history' do
       oystercard.top_up(Oystercard::MAX_BALANCE)

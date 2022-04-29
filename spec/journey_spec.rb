@@ -5,7 +5,6 @@ describe Journey do
 
   subject(:journey) { Journey.new }
 
-  
   describe '# start_journey' do
     it 'starts a journey and records entry station' do
       station_instance = Station.new('bank', 1)
@@ -22,5 +21,12 @@ describe Journey do
       
       expect(journey.current_journey[:exit]).not_to eq nil
     end
+  end
+
+  it "tells user if they are on a journey" do
+    station_instance = Station.new('bank', 1)
+    journey.start_journey(station_instance)
+
+    expect(journey).to be_on_journey
   end
 end

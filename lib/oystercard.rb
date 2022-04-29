@@ -5,8 +5,7 @@ class Oystercard
   def initialize
     @balance = 0
     @journey_history = []
-    @current_journey = {entry: nil, exit: nil}
-    # remove this ^
+    @new_journey = create_new_journey_instance
   end
 
   def show_balance
@@ -24,22 +23,26 @@ class Oystercard
 
   def touch_in(station) # station needs to be instance of Station class
     fail "Insufficient funds" if @balance < MIN_BALANCE
-    @current_journey[:entry] = station
+    create_new_journey_instance
+    @new_journey.start_journey(station)
+    # @current_journey[:entry] = station
     # replace ^ with new_journey = Journey.new
     # new_journey.start_journey(station_instance)
   end
 
   def touch_out(station) # station needs to be instance of Station class
-    fail "You're not touched in" unless on_journey?
+    fail "You're not touched in" unless @new_journey.on_journey?
     deduct_money(MIN_BALANCE)
-    @current_journey[:exit] = station
-    # replace ^ with new_journey.end_journey(station_instance)
-    @journey_history << @current_journey
-    # @journey_history << new_journey.current_journey
+    @new_journey.end_journey(station)
+    @journey_history << @new_journey.current_journey
   end
 
-  def on_journey?
-    @current_journey[:entry] == nil ? false : true
+  # def on_journey?
+  #   @new_journey.current_journey[:entry] == nil ? false : true
+  # end
+
+  def create_new_journey_instance
+    @new_journey = Journey.new
   end
 
   private

@@ -17,6 +17,9 @@ class Journey
   def end_journey(station_instance)
     @current_journey[:exit] = station_instance
   end
-  
+
+  def on_journey?
+    @current_journey[:entry] == nil ? false : true
+  end
 
 end
