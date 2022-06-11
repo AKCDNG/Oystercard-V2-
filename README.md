@@ -103,8 +103,3 @@ Call `touch_out('London Bridge')` to touch out of a station, in this case, Londo
 
 ## How To Test
 Run `RSpec` to run through tests.
-
-## Bugs/Future Changes To The Code
-* Have not implemented logic for strikes, spares, gutter games or frame 10 logic.
-* Fixed edge-case for inputting a score greater than 10 in one or both rolls.
-
