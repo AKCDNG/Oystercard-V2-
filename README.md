@@ -29,8 +29,6 @@
 ```
 
 This system was built using the following [TDD](https://en.wikipedia.org/wiki/Test-driven_development#:~:text=Test%2Ddriven%20development%20(TDD),software%20against%20all%20test%20cases.).
-
-Co-authored-by: [Anish Kakaiya](https://github.com/AKCDNG) and [Jimmy Lyons](https://github.com/PKilgarriff)
  
 Oystercard emulates the real-life system of how Oystercards work, but in Ruby within the command line.
 
@@ -104,7 +102,7 @@ Call `touch_out('London Bridge')` to touch out of a station, in this case, Londo
 
 
 ## How To Test
-Run `RSpec` to run through tests.\
+Run `RSpec` to run through tests.
 
 ## Bugs/Future Changes To The Code
 * Have not implemented logic for strikes, spares, gutter games or frame 10 logic.
