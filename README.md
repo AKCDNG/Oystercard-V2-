@@ -86,18 +86,18 @@ I need to have the correct fare calculated
 ```
 
 ## Installation
-Fork or download this repo.\
-Use `gem install bundler` to install the correct gems to use and test this code.\
-When installation completes, run `bundle`.\
+Fork or download this repo.
+Use `gem install bundler` to install the correct gems to use and test this code.
+When installation completes, run `bundle`.
 
 ## How To Use
-Load `oystercard.rb` in with `irb`.\
-Make a new instance of takeaway with `Oystercard.new`.\
-Call `show_balance` to show the current balance of your oystercard.\
-Call `show_journey_history` to view the previous journey history with that Oystercard.\
-Call `top_up(10)` to top up the Oystercard balance by £10.\
-Call `touch_in('Bank')` to touch into a station, in this case, Bank.\
-Call `touch_out('London Bridge')` to touch out of a station, in this case, London Bridge'.\
+Load `oystercard.rb` in with `irb`.
+Make a new instance of takeaway with `Oystercard.new`.
+Call `show_balance` to show the current balance of your oystercard.
+Call `show_journey_history` to view the previous journey history with that Oystercard.
+Call `top_up(10)` to top up the Oystercard balance by £10.
+Call `touch_in('Bank')` to touch into a station, in this case, Bank.
+Call `touch_out('London Bridge')` to touch out of a station, in this case, London Bridge'.
 
 
 
